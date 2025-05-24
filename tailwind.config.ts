@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
 export default {
   content: [
@@ -11,8 +12,23 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        heading: "var(--heading)",
+        links: "var(--links)",
+      },
+      fontFamily: {
+        poppins: ["var(--font-poppins)"],
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            "--tw-prose-body": "var(--foreground)",
+            "--tw-prose-headings": "var(--heading)",
+            "--tw-prose-links": "var(--links)",
+            "--tw-prose-bold": "var(--heading)",
+          },
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [typography],
 } satisfies Config;
