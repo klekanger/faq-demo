@@ -2,9 +2,18 @@
 
 import { useState } from "react";
 import { AccordionItem } from "../lib/types";
+import chevron from "@/public/chevron.svg";
+import Image from "next/image";
 
-export default function Accordion({ items }: { items: AccordionItem[] }) {
+export default function Accordion({
+  items,
+  title,
+}: {
+  items: AccordionItem[];
+  title: string;
+}) {
   const [openItems, setOpenItems] = useState<number[]>([]);
+  console.log("title ", title);
 
   const toggleItem = (index: number) => {
     setOpenItems((prev) => {
@@ -17,33 +26,54 @@ export default function Accordion({ items }: { items: AccordionItem[] }) {
   };
 
   return (
-    <section aria-label="accordion" className="pt-8">
-      {items.map((item, index) => {
-        const isOpen = openItems.includes(index);
-        const buttonId = `accordion-button-${index}`;
-        const contentId = `accordion-content-${index}`;
+    <section aria-label={`Accordion for ${title}`} className="pt-8">
+      <h1 className="text-heading text-center pb-8 md:pb-16">
+        {title ?? "Spørsmål og svar"}
+      </h1>
 
-        return (
-          <div key={item._id}>
-            <h3>
-              <button
-                id={buttonId}
-                className="text-links text-left w-full"
-                onClick={() => toggleItem(index)}
-                aria-expanded={isOpen}
-                aria-controls={contentId}
+      <div>
+        {items.map((item, index) => {
+          const isOpen = openItems.includes(index);
+          const buttonId = `accordion-button-${index}`;
+          const contentId = `accordion-content-${index}`;
+
+          return (
+            <div key={item._id}>
+              <h3 className="flex">
+                <button
+                  id={buttonId}
+                  className="text-links text-left w-full flex justify-between not-prose"
+                  onClick={() => toggleItem(index)}
+                  aria-expanded={isOpen}
+                  aria-controls={contentId}
+                >
+                  {item.name}
+
+                  <Image
+                    src={chevron}
+                    height={48}
+                    width={48}
+                    alt="chevron"
+                    className={`transition-transform duration-300 ease-in-out ${
+                      isOpen ? " rotate-180" : ""
+                    }`}
+                  />
+                </button>
+              </h3>
+              <div
+                id={contentId}
+                role="region"
+                aria-labelledby={buttonId}
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                }`}
               >
-                {item.name}
-              </button>
-            </h3>
-            {isOpen && (
-              <div id={contentId} role="region" aria-labelledby={buttonId}>
-                <p>{item.text}</p>
+                {item.text}
               </div>
-            )}
-          </div>
-        );
-      })}
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 }
