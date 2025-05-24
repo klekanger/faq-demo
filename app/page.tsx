@@ -27,6 +27,7 @@ export default async function Faq() {
               items={accordionItems}
               key={accordion._id}
               title={accordion.title}
+              // singleOnly={true}
             />
           </article>
         );

@@ -8,21 +8,27 @@ import Image from "next/image";
 export default function Accordion({
   items,
   title,
+  singleOnly = false,
 }: {
   items: AccordionItem[];
   title: string;
+  singleOnly?: boolean;
 }) {
   const [openItems, setOpenItems] = useState<number[]>([]);
   console.log("title ", title);
 
   const toggleItem = (index: number) => {
-    setOpenItems((prev) => {
-      if (prev.includes(index)) {
-        return prev.filter((item) => item !== index);
-      } else {
-        return [...prev, index];
-      }
-    });
+    if (singleOnly) {
+      setOpenItems([index]);
+    } else {
+      setOpenItems((prev) => {
+        if (prev.includes(index)) {
+          return prev.filter((item) => item !== index);
+        } else {
+          return [...prev, index];
+        }
+      });
+    }
   };
 
   return (
@@ -39,10 +45,10 @@ export default function Accordion({
 
           return (
             <div key={item._id}>
-              <h3 className="flex">
+              <h3 className="not-prose text-2xl">
                 <button
                   id={buttonId}
-                  className="text-links text-left w-full flex justify-between not-prose"
+                  className="text-links text-left w-full flex justify-between"
                   onClick={() => toggleItem(index)}
                   aria-expanded={isOpen}
                   aria-controls={contentId}
@@ -54,7 +60,7 @@ export default function Accordion({
                     height={48}
                     width={48}
                     alt="chevron"
-                    className={`transition-transform duration-300 ease-in-out ${
+                    className={`transition-transform duration-200 ease-in-out ${
                       isOpen ? " rotate-180" : ""
                     }`}
                   />
@@ -64,8 +70,8 @@ export default function Accordion({
                 id={contentId}
                 role="region"
                 aria-labelledby={buttonId}
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                className={`overflow-hidden transition-all duration-200 ease-in-out prose lg:prose-lg xl:prose-xl ${
+                  isOpen ? "max-h-96 opacity-100 pb-8" : "max-h-0 opacity-0"
                 }`}
               >
                 {item.text}
