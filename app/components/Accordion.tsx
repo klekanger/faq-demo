@@ -43,7 +43,7 @@ export default function Accordion({
 
           return (
             <div key={item._id}>
-              <h2 className="not-prose text-xl md:text-2xl pb-4 md:pb-8 group">
+              <h2 className="not-prose text-lg md:text-xl lg:text-2xl pb-4 md:pb-8 group">
                 <button
                   id={buttonId}
                   className="text-links text-left w-full flex justify-between"
@@ -55,7 +55,7 @@ export default function Accordion({
                     {item.name}
                   </span>
                   <ChevronIcon
-                    className={`transition-transform duration-200 ease-in-out w-[2rem] h-[2rem] ${
+                    className={`ml-2 transition-transform duration-200 ease-in-out w-[1.5rem] h-[1.5rem] md:w-[2rem] md:h-[2rem] ${
                       isOpen ? " rotate-180" : "group-hover:scale-110"
                     }`}
                   />
