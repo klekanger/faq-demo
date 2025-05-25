@@ -1,7 +1,7 @@
 "use client";
 
 import ChevronIcon from "@/app/icons/chevron";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AccordionItem } from "../lib/types";
 
 export default function Accordion({
@@ -13,8 +13,11 @@ export default function Accordion({
   title: string;
   singleOnly?: boolean;
 }) {
+  const accordionRef = useRef<HTMLDivElement>(null);
   const [openItems, setOpenItems] = useState<number[]>([]);
 
+  // Toggle the accordion items using their index number
+  // If singleOnly is true, only one item can be open at a time
   const toggleItem = (index: number) => {
     if (singleOnly) {
       setOpenItems([index]);
@@ -29,13 +32,30 @@ export default function Accordion({
     }
   };
 
+  // Close all items when clicking outside the accordion
+  const outsideClickHandler = (e: MouseEvent) => {
+    if (
+      accordionRef.current &&
+      !accordionRef.current.contains(e.target as Node)
+    ) {
+      setOpenItems([]);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", outsideClickHandler);
+    return () => {
+      document.removeEventListener("click", outsideClickHandler);
+    };
+  }, []);
+
   return (
     <section aria-label={`Accordion for ${title}`} className="pt-8">
       <h1 className="text-heading text-center pb-8 md:pb-16">
         {title ?? "Spørsmål og svar"}
       </h1>
 
-      <div>
+      <div ref={accordionRef}>
         {items.map((item, index) => {
           const isOpen = openItems.includes(index);
           const buttonId = `accordion-button-${index}`;
