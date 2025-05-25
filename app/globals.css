@@ -7,8 +7,8 @@
   --foreground: #fffce8;
   --heading: #fff7ca;
   --links: #6bffff;
+  --links-hover: #a7ffff;
 }
-
 
 body {
   color: var(--foreground);
@@ -17,5 +17,5 @@ body {
 }
 
 html {
-  scrollbar-gutter: stable;
+  scrollbar-gutter: stable both-edges; /* Prevent scrollbar from causing horizontal layout shift */
 }

@@ -14,6 +14,7 @@ export default {
         foreground: "var(--foreground)",
         heading: "var(--heading)",
         links: "var(--links)",
+        "links-hover": "var(--links-hover)",
       },
       fontFamily: {
         poppins: ["var(--font-poppins)"],
