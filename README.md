@@ -6,3 +6,4 @@
 - Contentful (using the GraphQL API)
 - Tailwind CSS
 - Tailwind Typography
+- Vitest + React Testing Library
