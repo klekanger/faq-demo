@@ -25,9 +25,9 @@ export default function ChevronIcon({
       <path
         d="M6 9L12 15L18 9"
         stroke={strokeColor}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
