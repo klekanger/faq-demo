@@ -2,7 +2,7 @@
 
 import ChevronIcon from "@/app/icons/chevron";
 import { useEffect, useRef, useState } from "react";
-import { AccordionItem } from "../lib/types";
+import { type AccordionItem } from "../lib/types";
 
 export default function Accordion({
   items,

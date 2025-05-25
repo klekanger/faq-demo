@@ -1,7 +1,7 @@
 import { fetchGraphQL } from "@/app/lib/api";
 import { faqQuery } from "@/app/lib/queries";
 import Accordion from "./components/Accordion";
-import { AccordionCollectionQueryResult } from "./lib/types";
+import { type AccordionCollectionQueryResult } from "./lib/types";
 
 export default async function Faq() {
   const { data } = await fetchGraphQL<AccordionCollectionQueryResult>(faqQuery);
