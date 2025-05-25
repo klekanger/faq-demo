@@ -1,9 +1,8 @@
 "use client";
 
+import ChevronIcon from "@/app/icons/chevron";
 import { useState } from "react";
 import { AccordionItem } from "../lib/types";
-import chevron from "@/public/chevron.svg";
-import Image from "next/image";
 
 export default function Accordion({
   items,
@@ -15,7 +14,6 @@ export default function Accordion({
   singleOnly?: boolean;
 }) {
   const [openItems, setOpenItems] = useState<number[]>([]);
-  console.log("title ", title);
 
   const toggleItem = (index: number) => {
     if (singleOnly) {
@@ -45,7 +43,7 @@ export default function Accordion({
 
           return (
             <div key={item._id}>
-              <h3 className="not-prose text-2xl">
+              <h2 className="not-prose text-xl md:text-2xl pb-4 md:pb-8 group">
                 <button
                   id={buttonId}
                   className="text-links text-left w-full flex justify-between"
@@ -53,19 +51,16 @@ export default function Accordion({
                   aria-expanded={isOpen}
                   aria-controls={contentId}
                 >
-                  {item.name}
-
-                  <Image
-                    src={chevron}
-                    height={48}
-                    width={48}
-                    alt="chevron"
-                    className={`transition-transform duration-200 ease-in-out ${
-                      isOpen ? " rotate-180" : ""
+                  <span className="hover:text-links-hover transition-colors duration-200 ease-in-out">
+                    {item.name}
+                  </span>
+                  <ChevronIcon
+                    className={`transition-transform duration-200 ease-in-out w-[2rem] h-[2rem] ${
+                      isOpen ? " rotate-180" : "group-hover:scale-110"
                     }`}
                   />
                 </button>
-              </h3>
+              </h2>
               <div
                 id={contentId}
                 role="region"
