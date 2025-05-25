@@ -49,6 +49,11 @@ export default function Accordion({
     };
   }, []);
 
+  if (!items || !Array.isArray(items)) {
+    console.error("Missing Accordion items or items is not an array");
+    return null;
+  }
+
   return (
     <section aria-label={`Accordion for ${title}`} className="pt-8">
       <h1 className="text-heading text-center pb-8 md:pb-16">
