@@ -1,6 +1,6 @@
 export const faqQuery = `
   {
-    accordionCollection (where:{internalName:"FAQ"}) {
+    accordionCollection  {
       items {
         _id
         title

@@ -29,13 +29,13 @@ export default async function Faq() {
               title={accordion.title}
               // singleOnly={true}
             />
-            <p className="text-gray-400 font-light text-sm md:text-base">
-              Ble du ikke noe klokere av dette? Ta kontakt på{" "}
-              <a href="mailto:kurt@lekanger.no">kurt@lekanger.no</a>
-            </p>
           </article>
         );
       })}
+      <p className="text-gray-400 font-light text-sm md:text-base">
+        Ble du ikke noe klokere av dette? Ta kontakt på{" "}
+        <a href="mailto:kurt@lekanger.no">kurt@lekanger.no</a>
+      </p>
     </>
   );
 }
